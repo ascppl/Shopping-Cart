@@ -1,12 +1,4 @@
 /* Create an array named products which you will use to add all of your product object literals that you create in the next step. */
-const products = [
-  { name: 'Cherry', price: 2.50, quantity: 0, productId: 1, image: 'images/cherry.jpg' },
-  { name: 'Orange', price: 3.00, quantity: 0, productId: 2, image: 'images/orange.jpg' },
-  { name: 'Strawberry', price: 4.00, quantity: 0, productId: 3, image: 'images/strawberry.jpg' }
-];
-
-let cart = []; 
-
 /* Create 3 or more product objects using object literal notation 
    Each product should include five properties
    - name: name of product (string)
@@ -15,20 +7,36 @@ let cart = [];
    - productId: unique id for the product (number)
    - image: picture of product (url string)
 */
-
 /* Images provided in /images folder. All images from Unsplash.com
    - cherry.jpg by Mae Mu
    - orange.jpg by Mae Mu
    - strawberry.jpg by Allec Gomes
 */
+const products = [
+  { name: 'Cherry', price: 3.00, quantity: 0, productId: 1, image: 'images/cherry.jpg' },
+  { name: 'Orange', price: 5.00, quantity: 0, productId: 2, image: 'images/orange.jpg' },
+  { name: 'Strawberry', price: 7.00, quantity: 0, productId: 3, image: 'images/strawberry.jpg' }
+];
 
 /* Declare an empty array named cart to hold the items in the cart */
+let cart = []; 
 
 /* Create a function named addProductToCart that takes in the product productId as an argument
   - addProductToCart should get the correct product based on the productId
   - addProductToCart should then increase the product's quantity
   - if the product is not already in the cart, add it to the cart
 */
+function addProductToCart(productId) {
+  const product = findProductById(productId);
+  if (product) {
+      let cartItem = findCartItemById(productId);
+      if (cartItem) {
+          cartItem.quantity++;
+      } else {
+          cart.push({ ...product, quantity: 1 }); 
+      }
+  }
+}
 
 /* Create a function named increaseQuantity that takes in the productId as an argument
   - increaseQuantity should get the correct product based on the productId
