@@ -90,6 +90,20 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
+function pay(amount) {
+  const total = cartTotal();
+  return amount - total;
+}
+
+function findProductById(productId) {
+  return products.find(product => product.productId === productId);
+}
+
+// Find cart item by ID
+function findCartItemById(productId) {
+  return cart.find(item => item.productId === productId);
+}
+
 
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
 
