@@ -90,9 +90,12 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
+let totalPaid = 0; // Declare totalPaid as a global variable
+
 function pay(amount) {
   const total = cartTotal();
-  return amount - total;
+  totalPaid += amount; // Update totalPaid
+  return amount - total; // Calculate and return the difference
 }
 
 function findProductById(productId) {
