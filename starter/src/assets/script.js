@@ -93,9 +93,9 @@ function emptyCart() {
 let totalPaid = 0; // Declare totalPaid as a global variable
 
 function pay(amount) {
-  const total = cartTotal();
-  totalPaid += amount; // Update totalPaid
-  return amount - total; // Calculate and return the difference
+  totalPaid += amount;
+  const remainingBalance = cartTotal() - totalPaid; // Correct calculation
+  return -remainingBalance; // Negate the remaining balance
 }
 
 function findProductById(productId) {
