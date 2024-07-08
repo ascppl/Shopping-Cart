@@ -14,13 +14,31 @@
    - strawberry.jpg by Allec Gomes
 */
 const products = [
-  { name: 'Cherry', price: 3.00, quantity: 0, productId: 1, image: 'images/cherry.jpg' },
-  { name: 'Orange', price: 5.00, quantity: 0, productId: 2, image: 'images/orange.jpg' },
-  { name: 'Strawberry', price: 7.00, quantity: 0, productId: 3, image: 'images/strawberry.jpg' }
+  {
+    name: "Cherry",
+    price: 3.0,
+    quantity: 0,
+    productId: 1,
+    image: "images/cherry.jpg",
+  },
+  {
+    name: "Orange",
+    price: 5.0,
+    quantity: 0,
+    productId: 2,
+    image: "images/orange.jpg",
+  },
+  {
+    name: "Strawberry",
+    price: 7.0,
+    quantity: 0,
+    productId: 3,
+    image: "images/strawberry.jpg",
+  },
 ];
 
 /* Declare an empty array named cart to hold the items in the cart */
-let cart = []; 
+let cart = [];
 
 /* Create a function named addProductToCart that takes in the product productId as an argument
   - addProductToCart should get the correct product based on the productId
@@ -30,12 +48,12 @@ let cart = [];
 function addProductToCart(productId) {
   const product = findProductById(productId);
   if (product) {
-      let cartItem = findCartItemById(productId);
-      if (cartItem) {
-          cartItem.quantity++;
-      } else {
-          cart.push({ ...product, quantity: 1 }); 
-      }
+    let cartItem = findCartItemById(productId);
+    if (cartItem) {
+      cartItem.quantity++;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
   }
 }
 
@@ -46,7 +64,7 @@ function addProductToCart(productId) {
 function increaseQuantity(productId) {
   const cartItem = findCartItemById(productId);
   if (cartItem) {
-      cartItem.quantity++;
+    cartItem.quantity++;
   }
 }
 /* Create a function named decreaseQuantity that takes in the productId as an argument
@@ -57,10 +75,10 @@ function increaseQuantity(productId) {
 function decreaseQuantity(productId) {
   const cartItem = findCartItemById(productId);
   if (cartItem) {
-      cartItem.quantity--;
-      if (cartItem.quantity === 0) {
-          removeProductFromCart(productId);
-      }
+    cartItem.quantity--;
+    if (cartItem.quantity === 0) {
+      removeProductFromCart(productId);
+    }
   }
 }
 /* Create a function named removeProductFromCart that takes in the productId as an argument
@@ -69,7 +87,7 @@ function decreaseQuantity(productId) {
   - removeProductFromCart should remove the product from the cart
 */
 function removeProductFromCart(productId) {
-  cart = cart.filter(item => item.productId !== productId);
+  cart = cart.filter((item) => item.productId !== productId);
 }
 
 /* Create a function named cartTotal that has no parameters
@@ -90,26 +108,31 @@ function emptyCart() {
   - pay will return a positive number if money should be returned to customer
   Hint: cartTotal function gives us cost of all the products in the cart  
 */
-let totalPaid = 0; // Declare totalPaid as a global variable
 
+let totalPaid = 0;
 function pay(amount) {
   totalPaid += amount;
-  const remainingBalance = cartTotal() - totalPaid; // Correct calculation
-  return -remainingBalance; // Negate the remaining balance
+  const remainingBalance = totalPaid - cartTotal();
+  if (remainingBalance >= 0) {
+    emptyCart();
+    totalPaid = 0;
+    return remainingBalance;
+  } else {
+    // There's still a balance due
+    return remainingBalance;
+  }
 }
 
 function findProductById(productId) {
-  return products.find(product => product.productId === productId);
+  return products.find((product) => product.productId === productId);
 }
 
 // Find cart item by ID
 function findCartItemById(productId) {
-  return cart.find(item => item.productId === productId);
+  return cart.find((item) => item.productId === productId);
 }
 
-
 /* Place stand out suggestions here (stand out suggestions can be found at the bottom of the project rubric.)*/
-
 
 /* The following is for running unit tests. 
    To fully complete this project, it is expected that all tests pass.
@@ -118,15 +141,15 @@ function findCartItemById(productId) {
 */
 
 module.exports = {
-   products,
-   cart,
-   addProductToCart,
-   increaseQuantity,
-   decreaseQuantity,
-   removeProductFromCart,
-   cartTotal,
-   pay, 
-   emptyCart,
-   /* Uncomment the following line if completing the currency converter bonus */
-   // currency
-}
+  products,
+  cart,
+  addProductToCart,
+  increaseQuantity,
+  decreaseQuantity,
+  removeProductFromCart,
+  cartTotal,
+  pay,
+  emptyCart,
+  /* Uncomment the following line if completing the currency converter bonus */
+  // currency
+};
